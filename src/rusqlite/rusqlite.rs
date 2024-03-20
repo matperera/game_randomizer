@@ -11,7 +11,13 @@ pub struct Console {
     pub plays_left: i32,
 }
 
-pub fn create_table() -> Result<()> {
+pub fn setup() -> Result<()> {
+    let data = check_table()?;
+
+    if data {
+        return Ok(());
+    }
+
     let conn = Connection::open("./consoles.db")?;
 
     conn.execute(
@@ -22,14 +28,8 @@ pub fn create_table() -> Result<()> {
         )",
         [],
     )?;
-    Ok(())
-}
 
-pub fn fill_table() -> Result<()> {
-    let conn = Connection::open("./consoles.db")?;
-
-    // This is hardcoded for my use
-    let consoles = vec![
+   let consoles = vec![
         "Steam Deck",
         "Nintendo Switch",
         "PS5",
@@ -41,15 +41,15 @@ pub fn fill_table() -> Result<()> {
         "GameCube",
         "PS2"
     ];
+
     for console in consoles {
         conn.execute(
-            "INSERT INTO console_plays (console, plays_left) VALUES (?1, ?2)",
-            [console, &"5"],
+            "INSERT INTO console_plays (console, plays_left) VALUES (?, ?)",
+            [console, "5"],
         )?;
     }
 
     Ok(())
-
 }
 
 #[allow(private_interfaces)]

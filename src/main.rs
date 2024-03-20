@@ -27,14 +27,13 @@ enum Commands {
     /// find and execute a reference
     Select,
 
-    /// new setup
-    New,
-
     /// allows to edit play date
     Edit,
 }
 
-fn main() {
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let _ = rusqlite::rusqlite::setup()?;
+
     let cli = Cli::parse();
 
     match &cli.command {
@@ -47,24 +46,15 @@ fn main() {
             randomize_data();
         },
 
-        Commands::New => {
-            let _ = rusqlite::rusqlite::create_table();
-            let _ = rusqlite::rusqlite::fill_table();
-        },
-
         Commands::Edit => {
             edit_consolse_counter();
         },
     }
+
+    Ok(())
 }
 
 pub fn randomize_data() {
-    let table_exits = rusqlite::rusqlite::check_table().unwrap();
-    if !table_exits {
-        println!("{}", "Please create the table first using new.".yellow());
-        return;
-    }
-
     let console_data = rusqlite::rusqlite::get_consoles().unwrap();
     if console_data.is_empty() {
         println!("{}", "Please reset the counters using reset.".yellow());
