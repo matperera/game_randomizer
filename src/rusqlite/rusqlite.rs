@@ -30,8 +30,8 @@ pub fn setup() -> Result<()> {
     )?;
 
    let consoles = vec![
-        "Steam Deck",
-        "Nintendo Switch",
+        "SteamDeck",
+        "Switch",
         "PS5",
         "PC",
         "DS",
@@ -102,7 +102,7 @@ pub fn find_one_console(console: &str) -> Result<Console> {
 pub fn reset_counters() -> Result<()> {
     let conn = Connection::open("./consoles.db")?;
 
-    conn.execute("UPDATE console_plays SET plays_left = 3 WHERE console = 'Steam Deck'", [])?;
+    conn.execute("UPDATE console_plays SET plays_left = 5", [])?;
     Ok(())
 }
 
