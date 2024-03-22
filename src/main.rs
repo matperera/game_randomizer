@@ -19,7 +19,7 @@ enum Commands {
     Reset,
 
     /// find and execute a reference
-    Select,
+    Select(command::select::Select),
 
     /// allows to edit play date
     Edit(command::edit::Edit),
@@ -36,8 +36,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             command::reset::run();
         },
 
-        Commands::Select => {
-            command::select::run();
+        Commands::Select(select) => {
+            command::select::run(&select);
         },
 
         Commands::Edit(edit) => {

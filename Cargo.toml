@@ -1,6 +1,6 @@
 [package]
 name = "game_randomizer"
-version = "0.3.0"
+version = "0.4.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -13,3 +13,4 @@ rand = "0.8.4"
 rand_distr = "0.4.2"
 indicatif = "0.16.2"
 colored = "2.0"
+lazy_static = "1.4.0"
