@@ -1,3 +1,3 @@
 # game_randomizer
 
-Rust cli mini project that ranomizes what console I play next off of weighted values.
+Rust cli mini project that randomizes what console I play next off of weighted values.
